@@ -1,0 +1,66 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Schedule for teacher</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+  </head>
+  <body>
+  
+<form action="/schedule_teacher" method="post">
+  <div class="container mt-4">
+    <h2>Select instructor </h2>
+  
+    <div class="form-group">
+        {% csrf_token %}
+      <label for="dropdown">Select an option:</label>
+      <select class="form-control select2-dropdown" id="dropdown" name="dropdown">
+        {% for opt in dropdown_list %}
+        <option value="{{opt}}">{{opt}}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+</form> 
+<br>
+<hr>
+{%if greeting %}
+<div class="container mt-5">
+    <div class="text-center">
+      <h5>{{greeting}}</h1>
+      <br>
+    </div>
+</div>
+{% endif %}
+{% if table %}
+{{ table|safe }}
+{% endif %}
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <!-- Select2 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  
+  <script>
+    // Initialize Select2
+    $(document).ready(function() {
+      $('.select2-dropdown').select2({
+        width: '30%'
+    });
+    });
+  </script>
+  
+  </body>
+
+{% endblock %}

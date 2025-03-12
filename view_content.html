@@ -1,0 +1,69 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+<head>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <style>
+/* Add custom CSS to style the form elements */ 
+        .form-group {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        /* <!-- Include Bootstrap CSS in the head section --> */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 8px; /* Adjust the padding as needed */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Optional: Add a background color to the column headings */
+        }
+    </style>
+
+</head>
+    <br>
+    <div class="container mt-5">
+        <div class="text-center">
+          <h1>1. Filter Courses!</h1>
+        </div>
+    </div>
+    <div class="container">
+    <h2>Filter Courses by </h2><br>
+    <form action="/view_content" method="post" class="form-inline">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="crn">CRN :</label>
+            <input type="text" class="form-control" id="crn" name="crn" value="{{request.POST.crn}}">
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Subject :</label>
+            <input type="text" class="form-control" id="subject" name="subject" value="{{request.POST.subject}}">
+        </div>
+
+        <div class="form-group">
+            <label for="course">Course :</label>
+            <input type="text" class="form-control" id="course" name="course" value="{{request.POST.course}}">
+        </div>
+
+        <div class="form-group">
+            <label for="instructor">Instructor :</label>
+            <input type="text" class="form-control" id="instructor" name="instructor" value="{{request.POST.instructor}}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    </div><br>
+    <hr>
+    <!-- django template language for displaying info from views.py-->
+    {% if table %}
+    {{ table|safe }}
+    {% endif %}
+{% endblock %}

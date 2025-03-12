@@ -1,0 +1,63 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+<head>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <style>
+/* Add custom CSS to style the form elements */ 
+        .form-group {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 8px; /* Adjust the padding as needed */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Optional: Add a background color to the column headings */
+        }
+    </style>
+
+</head>
+    <br>
+    <div class="container mt-5">
+        <div class="text-center">
+          <h1>2. Student Schedule</h1>
+        </div>
+    </div>
+    <div class="container">
+    <br><br>
+    <h5>Please enter CRN's of courses separated by comma(,). Atleast, three CRN's need to be provided. ex. 80001,80002,80003 </h5><br>
+    <form action="/schedule_student" method="post" class="form-inline">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="crn">CRN's :</label>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="crn" name="crn" value="{{request.POST.crn}}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    </div><br>
+    <hr>
+        <!-- django template language for displaying info from views.py-->
+    {%if greeting %}
+    <div class="container mt-5">
+        <div class="text-center">
+          <h5>{{greeting}}</h1>
+        </div>
+    </div>
+    {% endif %}
+    {% if table %}
+    {{ table|safe }}
+    {% endif %}
+{% endblock %}
